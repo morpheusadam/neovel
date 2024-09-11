@@ -4,7 +4,7 @@ namespace Modules\Auth\Models\API\V1;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Auth\Database\Factories\API/V1/UserMetaFactory;
+//use Modules\Auth\Database\Factories\API/V1/UserMetaFactory;
 
 class UserMeta extends Model
 {
@@ -15,8 +15,8 @@ class UserMeta extends Model
      */
     protected $fillable = [];
 
-    protected static function newFactory(): API/V1/UserMetaFactory
-    {
-        //return API/V1/UserMetaFactory::new();
-    }
+    // protected static function newFactory(): API/V1/UserMetaFactory
+    // {
+    //     //return API/V1/UserMetaFactory::new();
+    // }
 }

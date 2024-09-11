@@ -20,6 +20,11 @@ return new class extends Migration
               ->index()
               ->comment('Unique username for the user');
 
+              $table->string('phone', 15)
+              ->nullable()
+              ->unique() 
+              ->comment('phone number');
+
         $table->string('password', 255)
               ->comment('Hashed password for the user');
 

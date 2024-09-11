@@ -1,6 +1,16 @@
 php artisan module:make-controller API/V1/AuthController Auth
 php artisan module:make-migration create_auth_table Auth
 
+
+mkdir -p Modules/Auth/resources/lang/en
+mkdir -p Modules/Auth/resources/lang/fa
+
+sudo touch -p Modules/Auth/resources/lang/en/messages.php
+sudo touch -p Modules/Auth/resources/lang/fa/messages.php
+
+
+
+
 module:make
 module:make
 module:use

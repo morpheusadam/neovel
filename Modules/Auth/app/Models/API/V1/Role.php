@@ -4,7 +4,7 @@ namespace Modules\Auth\Models\API\V1;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Auth\Database\Factories\API/V1/RoleFactory;
+//use Modules\Auth\Database\Factories\API/V1/RoleFactory;
 
 class Role extends Model
 {
@@ -15,8 +15,8 @@ class Role extends Model
      */
     protected $fillable = [];
 
-    protected static function newFactory(): API/V1/RoleFactory
-    {
-        //return API/V1/RoleFactory::new();
-    }
+    // protected static function newFactory(): API/V1/RoleFactory
+    // {
+    //     //return API/V1/RoleFactory::new();
+    // }
 }
