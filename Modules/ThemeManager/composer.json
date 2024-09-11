@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/thememanager",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ThemeManager\\": "app/",
+            "Modules\\ThemeManager\\Database\\Factories\\": "database/factories/",
+            "Modules\\ThemeManager\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\ThemeManager\\Tests\\": "tests/"
+        }
+    }
+}
