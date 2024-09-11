@@ -3,9 +3,10 @@
 namespace Modules\CMS\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Modules\CMS\Models\Post;
 
 class PostController extends Controller
 {
@@ -14,54 +15,71 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('cms::index');
+        return response()->json([
+            'messages' => __('CMS::messages.index'),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('cms::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
+     * Display the specified resource.
      */
     public function show($id)
     {
-        return view('cms::show');
+        return response()->json([
+            'messages' => __('CMS::messages.show'),
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Validate the post creation request.
      */
-    public function edit($id)
+    public function validatePostData(Request $request) // تغییر به public
     {
-        return view('cms::edit');
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'textcontent' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors(),
+            ], 422);
+        }
     }
 
     /**
-     * Update the specified resource in storage.
+     * Save the post to the database.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function savePost(Request $request) // تغییر به public
     {
-        //
+        return Post::create([
+            'user_id' => $request->user()->id,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'textcontent' => $request->textcontent,
+        ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Handle the post creation request.
      */
-    public function destroy($id)
+    public function store(Request $request)
     {
-        //
+        $validationResponse = $this->validatePostData($request);
+        if ($validationResponse) {
+            return $validationResponse;
+        }
+
+        try {
+            $post = $this->savePost($request);
+            return response()->json($post, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An error occurred while creating the post.',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
