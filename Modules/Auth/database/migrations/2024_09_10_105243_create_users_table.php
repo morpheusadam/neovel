@@ -13,38 +13,42 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id()
-            ->comment('Unique');
+                ->comment('Unique');
 
-        $table->string('username', 50)
-              ->unique()
-              ->index()
-              ->comment('Unique username for the user');
 
-              $table->string('phone', 15)
-              ->nullable()
-              ->unique() 
-              ->comment('phone number');
+            $table->string('username', 50)
+                ->unique()
+                ->nullable()
+                ->index()
+                ->comment('Unique username for the user');
 
-        $table->string('password', 255)
-              ->comment('Hashed password for the user');
+            $table->string('phone', 15)
+                ->nullable()
+                ->unique()
+                ->comment('phone number');
 
-        $table->string('email', 100)
-              ->unique()
-              ->index()
-              ->comment('Unique email address for the user');
+                $table->string('name', 50)
+                ->comment(' username for the user');
 
-        $table->boolean('is_active')
-              ->default(true)
-              ->comment('Indicates if the user is active');
+            $table->string('password', 255)
+                ->comment('Hashed password for the user');
 
-        $table->timestamp('email_verified_at')
-              ->nullable()
-              ->comment('Timestamp when the user\'s email was verified');
+            $table->string('email', 100)
+                ->unique()
+                ->index()
+                ->comment('Unique email address for the user');
 
-        $table->timestamps();
-        $table->softDeletes();
+            $table->boolean('is_active')
+                ->default(true)
+                ->comment('Indicates if the user is active');
 
-         });
+            $table->timestamp('email_verified_at')
+                ->nullable()
+                ->comment('Timestamp when the user\'s email was verified');
+
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
