@@ -11,6 +11,15 @@ class CMSDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        // Call each seeder class to seed the respective tables
+        $this->call([
+            CategoriesTableSeeder::class,
+            TagsTableSeeder::class,
+            PostsTableSeeder::class,
+            CommentsTableSeeder::class,
+            PostTagsTableSeeder::class,
+            PostMetaTableSeeder::class,
+            PagesTableSeeder::class,
+        ]);
     }
 }

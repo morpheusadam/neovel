@@ -13,9 +13,10 @@ return [
     | This will allow your users to receive real-time notifications.
     |
     */
+
     'auth' => [
         'guard' => env('FILAMENT_AUTH_GUARD', 'web'),
-        'user_model' => \Modules\Auth\Models\User::class,
+        'user' => App\Models\Users\User::class, // تغییر مسیر مدل User
     ],
 
 
