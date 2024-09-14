@@ -17,6 +17,10 @@ module
    composer require laravel/sanctum
       php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 
+php artisan make:filament-user
+
+
+
 
 
        // مدل مرتبط با ریسورس

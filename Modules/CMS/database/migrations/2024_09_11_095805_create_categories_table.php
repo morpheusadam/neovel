@@ -27,7 +27,6 @@ return new class extends Migration
                   ->unique()
                   ->comment('URL-friendly version of the category name, must be unique');
             $table->timestamps();
-
         });
     }
 
