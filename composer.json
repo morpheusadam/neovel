@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "morilog/jalali": "^3.4",
-        "nwidart/laravel-modules": "^11.0"
+        "nwidart/laravel-modules": "^11.0",
+        "rawilk/filament-password-input": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
