@@ -1,5 +1,5 @@
 {
-    "Auth": true,
-    "CMS": true,
-    "ThemeManager": true
+    "CMM": true,
+    "UCM": true,
+    "UMM": true
 }

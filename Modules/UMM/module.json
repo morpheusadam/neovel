@@ -1,0 +1,11 @@
+{
+    "name": "UMM",
+    "alias": "umm",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UMM\\Providers\\UMMServiceProvider"
+    ],
+    "files": []
+}

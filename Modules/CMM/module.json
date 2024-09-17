@@ -1,0 +1,11 @@
+{
+    "name": "CMM",
+    "alias": "CMM",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CMM\\Providers\\CMMServiceProvider"
+    ],
+    "files": []
+}

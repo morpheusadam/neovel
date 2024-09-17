@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/umm",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\UMM\\": "app/",
+            "Modules\\UMM\\Database\\Factories\\": "database/factories/",
+            "Modules\\UMM\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\UMM\\Tests\\": "tests/"
+        }
+    }
+}
