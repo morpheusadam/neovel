@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to our application!",
+  "login": "Login",
+  "register": "Register",
+  "email": "Email Address",
+  "password": "Password",
+  "confirm_password": "Confirm Password",
+  "logout": "Logout"
+
+
+}

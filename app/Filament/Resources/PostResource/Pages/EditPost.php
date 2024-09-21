@@ -19,7 +19,9 @@ class EditPost extends EditRecord
     protected static string $resource = PostResource::class;
 
     /**
-     * The preview modal URL.
+     * Get the URL for the preview modal.
+     *
+     * @return ?string
      */
     protected function getPreviewModalUrl(): ?string
     {
@@ -32,19 +34,29 @@ class EditPost extends EditRecord
     }
 
     /**
-     * The header actions.
+     * Define the header actions available on the page.
+     *
+     * @return array
      */
     protected function getHeaderActions(): array
     {
         return [
             PreviewAction::make(),
-
-            Actions\Action::make('view')
-                ->label('View post')
-                ->url(fn ($record) => $record->url)
-                ->extraAttributes(['target' => '_blank']),
-
+            $this->viewPostAction(),
             Actions\DeleteAction::make(),
         ];
+    }
+
+    /**
+     * Create the view post action.
+     *
+     * @return Actions\Action
+     */
+    private function viewPostAction(): Actions\Action
+    {
+        return Actions\Action::make('view')
+            ->label(__('view_post'))
+            ->url(fn($record) => $record->url)
+            ->extraAttributes(['target' => '_blank']);
     }
 }

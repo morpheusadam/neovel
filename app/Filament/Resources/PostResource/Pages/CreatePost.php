@@ -10,5 +10,6 @@ class CreatePost extends CreateRecord
     /**
      * The resource model.
      */
+    
     protected static string $resource = PostResource::class;
 }

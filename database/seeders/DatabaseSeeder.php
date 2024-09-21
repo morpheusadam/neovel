@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
 use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Modules\Mag\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.test',
             'password' => Hash::make('admin'),
         ]);
+        User::factory()->count(20)->create();
 
-        Post::factory()
-            ->count(25)
-            ->create();
+
+
 
         Notification::make()
             ->title('Welcome to Filament')

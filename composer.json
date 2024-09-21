@@ -23,6 +23,7 @@
     "livewire/livewire": "^3.3",
     "nwidart/laravel-modules": "^11.1",
     "pboivin/filament-peek": "^2.2",
+    "rawilk/filament-password-input": "^2.0",
     "romanzipp/laravel-seo": "^2.6",
     "sinnbeck/markdom": "^2.0",
     "z3d0x/filament-logger": "^0.7.0"

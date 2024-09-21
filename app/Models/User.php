@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Mag\Models\Post;
+use Modules\User\Models\Role;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -23,7 +25,24 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'is_activ',
     ];
+
+    /**
+     * Accessor for role names.
+     */
+    public function getRoleNamesAttribute()
+    {
+        return $this->roles->pluck('role_name')->join(', ');
+    }
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

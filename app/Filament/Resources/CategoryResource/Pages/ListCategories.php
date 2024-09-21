@@ -2,128 +2,136 @@
 
 namespace App\Filament\Resources\CategoryResource\Pages;
 
-use Awcodes\Curator\Components\Tables\CuratorColumn;
-use Modules\CMM\Models\Category;
+use Modules\Mag\Models\Category;
 use App\Filament\Resources\CategoryResource;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Pages\Actions\Action;
 use Filament\Forms;
-use Illuminate\Database\QueryException;
 use Filament\Notifications\Notification;
 
 class ListCategories extends ListRecords
 {
     protected static string $resource = CategoryResource::class;
 
-    public function getBreadcrumbs(): array
-    {
-        return [
-            url('/admin') => 'Dashboard',
-            url('/admin/categories') => 'Category Management',
-        ];
-    }
-
-    public function getTitle(): string
-    {
-        return 'Category Management';
-    }
-
+    /**
+     * Define the actions available on the page.
+     *
+     * @return array
+     */
     protected function getActions(): array
     {
         return [
             $this->createCategoryAction(),
-            $this->createPostAction(), // اضافه کردن اکشن ساخت پست
         ];
     }
 
+    /**
+     * Create the action for creating a new category.
+     *
+     * @return Action
+     */
     private function createCategoryAction(): Action
     {
+        $locale = app()->getLocale();
+        $menuTranslations = $this->getMenuTranslations($locale);
+        $createName = $this->getCreateName($menuTranslations);
+
         return Action::make('createCategory')
-            ->label('Create New Category')
-            ->modalHeading('Create New Category')
-            ->modalButton('Create')
-            ->form($this->getCategoryForm())
+            ->label($createName)
+            ->modalHeading(__('create'))
+            ->modalButton(__('create'))
+            ->form($this->getCategoryFormSchema())
             ->action(fn(array $data) => $this->handleCreateCategory($data));
     }
 
-    private function createPostAction(): Action
+    /**
+     * Get the menu translations for the current locale.
+     *
+     * @param string $locale
+     * @return array
+     */
+    private function getMenuTranslations(string $locale): array
     {
-        return Action::make('createPost')
-            ->label('ساخت پست')
-            ->url('/admin/posts/create') // لینک به صفحه ساخت پست
-            ->color('primary');
+        return json_decode(file_get_contents(base_path("lang/{$locale}.json")), true);
     }
 
-    private function getCategoryForm(): array
+    /**
+     * Get the translated name for the create action.
+     *
+     * @param array $menuTranslations
+     * @return string
+     */
+    private function getCreateName(array $menuTranslations): string
+    {
+        return str_replace(':name', 'دسته بندی', $menuTranslations['createname']);
+    }
+
+    /**
+     * Define the form schema for creating a new category.
+     *
+     * @return array
+     */
+    private function getCategoryFormSchema(): array
     {
         return [
             Forms\Components\Toggle::make('is_visible')
-            ->label('Visible')
-            ->default(true),
+                ->label(__('visible'))
+                ->default(true),
 
-        Forms\Components\RichEditor::make('description') // تغییر از Textarea به RichEditor
-            ->label('Description')
-            ->nullable()
-            ->columnSpan('full'), // تنظیم به صورت تمام صفحه
+            Forms\Components\RichEditor::make('description')
+                ->label(__('description'))
+                ->nullable()
+                ->columnSpan('full'),
 
-        Forms\Components\TextInput::make('name')
-            ->label('Name')
-            ->required(),
+            Forms\Components\TextInput::make('name')
+                ->label(__('name'))
+                ->unique()
+                ->required(),
 
-        Forms\Components\Select::make('parent_id')
-            ->label('Parent Category')
-            ->options(Category::all()->pluck('name', 'id'))
-            ->nullable(),
+            Forms\Components\Select::make('parent_id')
+                ->label(__('parent'))
+                ->options(Category::all()->pluck('name', 'id'))
+                ->nullable(),
 
-        Forms\Components\TextInput::make('slug')
-            ->label('Slug')
-            ->required(),
+            Forms\Components\TextInput::make('slug')
+                ->label(__('slug'))
+                ->unique()
+                ->required(),
 
-        Forms\Components\Select::make('order_column') // تغییر از CheckboxList به Select
-            ->label('Order')
-            ->options(array_combine(range(1, 20), range(1, 20)))
-            ->columns(2) // دو ستون افقی
-            ->required(),
+            Forms\Components\Select::make('order_column')
+                ->label(__('order'))
+                ->options(array_combine(range(1, 20), range(1, 20)))
+                ->columns(2)
+                ->unique()
+                ->required(),
 
-            CuratorPicker::make('image')
-            ->required(),
+            CuratorPicker::make('image_id')
+                ->label(__('image')),
         ];
     }
 
+    /**
+     * Handle the creation of a new category.
+     *
+     * @param array $data
+     * @return void
+     */
     private function handleCreateCategory(array $data): void
     {
-        try {
-            Category::create([
-                'name' => $data['name'],
-                'description' => $data['description'] ?? null,
-                'parent_id' => $data['parent_id'] ?? null,
-                'slug' => $data['slug'],
-                'image_path' => $data['image_path'] ?? null,
-                'order_column' => $data['order_column'],
-                'is_visible' => $data['is_visible'],
-            ]);
+        Category::create([
+            'name' => $data['name'],
+            'description' => $data['description'] ?? null,
+            'parent_id' => $data['parent_id'] ?? null,
+            'slug' => $data['slug'],
+            'image_id' => $data['image_id'] ?? null,
+            'order_column' => $data['order_column'],
+            'is_visible' => $data['is_visible'],
+        ]);
 
-            Notification::make()
-                ->title('Success')
-                ->body('Category created successfully.')
-                ->success()
-                ->send();
-        } catch (QueryException $e) {
-            if ($e->getCode() == 23000) { // Integrity constraint violation
-                Notification::make()
-                    ->title('Error')
-                    ->body('Category already exists.')
-                    ->danger()
-                    ->send();
-            } else {
-                Notification::make()
-                    ->title('Error')
-                    ->body('An error occurred: ' . $e->getMessage())
-                    ->danger()
-                    ->send();
-            }
-        }
+        Notification::make()
+            ->title(__('curator::forms.notices.success'))
+            ->success()
+            ->send();
     }
 }

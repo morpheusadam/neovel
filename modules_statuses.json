@@ -1,5 +1,10 @@
 {
     "CMM": true,
     "UCM": true,
-    "UMM": true
+    "UMM": true,
+    "Filament": true,
+    "Mag": true,
+    "User": true,
+    "Ecommerce": true,
+    "Setting": true
 }

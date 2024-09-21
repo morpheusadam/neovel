@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\PostResource\Widgets;
 
-use App\Models\Post;
+use Modules\Mag\Models\Post;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Number;
@@ -19,16 +19,16 @@ class PostOverview extends BaseWidget
         $drafts = Post::drafts()->count();
 
         return [
-            Stat::make('Total Posts', Number::format($posts))
-                ->description('The total number of posts')
+            Stat::make(__('total'), Number::format($posts))
+                ->description(__('total_posts_description'))
                 ->icon('heroicon-o-book-open'),
 
-            Stat::make('Published Posts', Number::format($published))
-                ->description('The total number of published posts')
+            Stat::make(__('published'), Number::format($published))
+                ->description(__('published_posts_description'))
                 ->icon('heroicon-o-check-circle'),
 
-            Stat::make('Draft Posts', Number::format($drafts))
-                ->description('The total number of draft posts')
+            Stat::make(__('draft'), Number::format($drafts))
+                ->description(__('draft_posts_description'))
                 ->icon('heroicon-o-x-circle'),
         ];
     }

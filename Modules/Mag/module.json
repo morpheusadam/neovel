@@ -1,0 +1,11 @@
+{
+    "name": "Mag",
+    "alias": "mag",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Mag\\Providers\\MagServiceProvider"
+    ],
+    "files": []
+}

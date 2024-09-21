@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
-use App\Models\Post;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Awcodes\Curator\Components\Tables\CuratorColumn;
 use Filament\Forms;
@@ -15,13 +14,37 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Modules\Mag\Models\Post;
 
 class PostResource extends Resource
 {
     /**
      * The resource record title.
      */
-    protected static ?string $recordTitleAttribute = 'title';
+    public static function getBreadcrumb(): string
+    {
+        return __('post');
+    }
+
+    /**
+     * Get the plural label for the resource.
+     *
+     * @return string
+     */
+    public static function getPluralLabel(): string
+    {
+        return __('manage_posts');
+    }
+
+    /**
+     * Get the navigation label for the resource.
+     *
+     * @return string
+     */
+    public static function getNavigationLabel(): string
+    {
+        return __('post');
+    }
 
     /**
      * The resource model.
@@ -29,22 +52,49 @@ class PostResource extends Resource
     protected static ?string $model = Post::class;
 
     /**
+     * Get the navigation group for the resource.
+     *
+     * @return ?string
+     */
+    public static function getNavigationGroup(): ?string
+    {
+        return __('blog');
+    }
+
+    /**
+     * Get the title for the resource.
+     *
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return __('post');
+    }
+
+    /**
+     * Get the header for the resource.
+     *
+     * @return string
+     */
+    public function getHeader(): string
+    {
+        return __('post');
+    }
+
+    /**
      * The resource icon.
      */
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     /**
-     * The resource navigation group.
-     */
-    protected static ?string $navigationGroup = 'Collections';
-
-    /**
      * The resource navigation sort order.
      */
-    protected static ?int $navigationSort = 0;
+    protected static ?int $navigationSort = 1;
 
     /**
      * Get the navigation badge for the resource.
+     *
+     * @return ?string
      */
     public static function getNavigationBadge(): ?string
     {
@@ -53,6 +103,9 @@ class PostResource extends Resource
 
     /**
      * Get the form for the resource.
+     *
+     * @param Form $form
+     * @return Form
      */
     public static function form(Form $form): Form
     {
@@ -65,7 +118,8 @@ class PostResource extends Resource
                             ->columnSpan(2)
                             ->schema([
                                 Forms\Components\TextInput::make('title')
-                                    ->placeholder('Enter a title')
+                                    ->label(__('title'))
+                                    ->placeholder(__('title_placeholder'))
                                     ->live()
                                     ->afterStateUpdated(function (Get $get, Set $set, string $operation, ?string $old, ?string $state) {
                                         if (($get('slug') ?? '') !== Str::slug($old) || $operation !== 'create') {
@@ -79,6 +133,7 @@ class PostResource extends Resource
                                     ->autofocus(),
 
                                 Forms\Components\Builder::make('content')
+                                    ->label(__('content'))
                                     ->required()
                                     ->columnSpanFull()
                                     ->default([
@@ -86,6 +141,7 @@ class PostResource extends Resource
                                     ])
                                     ->blocks([
                                         Builder\Block::make('markdown')
+                                            ->label(__('markdown'))
                                             ->schema([
                                                 Forms\Components\MarkdownEditor::make('content')
                                                     ->required(),
@@ -97,19 +153,18 @@ class PostResource extends Resource
                                                     ->required(),
 
                                                 Forms\Components\Fieldset::make()
-                                                    ->label('Details')
+                                                    ->label(__('details'))
                                                     ->schema([
                                                         Forms\Components\TextInput::make('alt')
-                                                            ->label('Alt Text')
-                                                            ->placeholder('Enter alt text')
+                                                            ->label(__('alt_text'))
+                                                            ->placeholder(__('enter_alt_text'))
                                                             ->required()
                                                             ->maxLength(255),
 
                                                         Forms\Components\TextInput::make('caption')
-                                                            ->placeholder('Enter a caption')
+                                                            ->placeholder(__('enter_caption'))
                                                             ->maxLength(255),
                                                     ]),
-
                                             ]),
                                     ]),
                             ]),
@@ -118,29 +173,35 @@ class PostResource extends Resource
                             ->columnSpan(1)
                             ->schema([
                                 Forms\Components\TextInput::make('slug')
-                                    ->placeholder('Enter a slug')
+                                    ->placeholder(__('enter_slug'))
                                     ->alphaDash()
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
 
+                                Forms\Components\Select::make('category_id')
+                                    ->label(__('category'))
+                                    ->relationship('category', 'name')
+                                    ->required()
+                                    ->searchable(),
+
                                 Forms\Components\Select::make('user_id')
-                                    ->label('Author')
+                                    ->label(__('author'))
                                     ->relationship('user', 'name')
-                                    ->default(fn () => auth()->id())
+                                    ->default(fn() => auth()->id())
                                     ->searchable()
                                     ->required(),
 
                                 CuratorPicker::make('image_id')
-                                    ->label('Featured Image'),
+                                    ->label(__('featured_image')),
 
                                 Forms\Components\DatePicker::make('published_at')
-                                    ->label('Publish Date')
+                                    ->label(__('publish_date'))
                                     ->default(now())
                                     ->required(),
 
                                 Forms\Components\Toggle::make('is_published')
-                                    ->label('Published')
+                                    ->label(__('published'))
                                     ->required(),
                             ]),
                     ]),
@@ -149,26 +210,30 @@ class PostResource extends Resource
 
     /**
      * Get the table for the resource.
+     *
+     * @param Table $table
+     * @return Table
      */
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                CuratorColumn::make('image')
+                    ->label(__('image'))
+                    ->circular()
+                    ->size(32),
                 Tables\Columns\TextColumn::make('title')
+                    ->label(__('title'))
                     ->sortable()
                     ->searchable(),
 
-                CuratorColumn::make('image')
-                    ->circular()
-                    ->size(32),
-
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Author')
+                    ->label(__('author'))
                     ->badge()
                     ->sortable(),
 
                 Tables\Columns\IconColumn::make('is_published')
-                    ->label('Published')
+                    ->label(__('published'))
                     ->boolean()
                     ->sortable(),
 
@@ -202,6 +267,8 @@ class PostResource extends Resource
 
     /**
      * Get the relationships for the resource.
+     *
+     * @return array
      */
     public static function getRelations(): array
     {
@@ -212,6 +279,8 @@ class PostResource extends Resource
 
     /**
      * Get the pages for the resource.
+     *
+     * @return array
      */
     public static function getPages(): array
     {

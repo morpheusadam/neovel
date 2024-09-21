@@ -28,8 +28,19 @@ use Pboivin\FilamentPeek\FilamentPeekPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
+    // Load the JSON configuration
+
+
     public function panel(Panel $panel): Panel
     {
+         $locale = app()->getLocale();
+         $menuTranslations = json_decode(file_get_contents(base_path("lang/{$locale}.json")), true);
+
+         $settingsLabel = $menuTranslations['settings'];
+         $blogsLabel = $menuTranslations['blog'];
+         $usersgsLabel = $menuTranslations['users'];
+         $mediaLabel = $menuTranslations['media'];
+
         return $panel
             ->default()
             ->id('admin')
@@ -48,17 +59,22 @@ class AdminPanelProvider extends PanelProvider
                     ->enableTwoFactorAuthentication(),
 
                 CuratorPlugin::make()
-                    ->label('Media')
-                    ->pluralLabel('Media Library')
+                ->label(__('file')) // تغییر نام منو
+
+                    ->pluralLabel(label: __('media'))
+                    ->navigationLabel($mediaLabel) // تغییر نام گروه ناوبری
                     ->navigationIcon('heroicon-o-photo')
-                    ->navigationGroup('Media')
+                    ->navigationGroup($blogsLabel)
+                    ->navigationSort(4)
                     ->navigationCountBadge(),
 
                 FilamentJobsMonitorPlugin::make()
                     ->navigationCountBadge()
-                    ->navigationGroup('Settings'),
+
+                    ->navigationGroup($settingsLabel),
 
                 FilamentPeekPlugin::make()
+
                     ->disablePluginStyles(),
 
                 FilamentExceptionsPlugin::make(),
@@ -67,12 +83,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->defaultAvatarProvider(GravatarProvider::class)
             ->favicon(asset('/favicon-32x32.png'))
+
             ->brandLogo(fn () => view('components.logo'))
             ->navigationGroups([
-                'Collections',
-                'Media',
-                'Settings',
+                $blogsLabel,
+                $usersgsLabel,
+                $settingsLabel
             ])
+
             ->colors([
                 'primary' => Color::Blue,
             ])

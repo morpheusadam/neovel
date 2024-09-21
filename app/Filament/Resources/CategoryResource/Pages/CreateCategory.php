@@ -4,75 +4,76 @@ namespace App\Filament\Resources\CategoryResource\Pages;
 
 use App\Filament\Resources\CategoryResource;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
-use Awcodes\Curator\Components\Tables\CuratorColumn;
-use Modules\CMM\Models\Category;
 use Filament\Resources\Pages\CreateRecord;
 use Filament\Forms;
-use TomatoPHP\FilamentMediaManager\Form\MediaManagerInput;
+use Modules\Mag\Models\Category;
 
 class CreateCategory extends CreateRecord
 {
     protected static string $resource = CategoryResource::class;
 
+    /**
+     * Get the title for the create category page.
+     *
+     * @return string
+     */
     public function getTitle(): string
     {
-        return 'ایجاد دسته جدید';
+        return __('create_category');
     }
 
+    /**
+     * Define the form schema for creating a category.
+     *
+     * @param Forms\Form $form
+     * @return Forms\Form
+     */
     public function form(Forms\Form $form): Forms\Form
     {
-        return $form
-            ->schema([
-                Forms\Components\Toggle::make('is_visible')
-                    ->label('Visible')
-                    ->default(true),
-
-                Forms\Components\RichEditor::make('description')
-                    ->label('Description')
-                    ->columnSpan('full'),
-
-                Forms\Components\TextInput::make('name')
-                    ->label('Name')
-                    ->required()
-                    ->unique(Category::class, 'name', fn($record) => $record),
-
-
-                Forms\Components\Select::make('parent_id')
-                    ->label('Parent Category')
-                    ->options(Category::all()->pluck('name', 'id'))
-                    ->nullable(),
-
-                Forms\Components\TextInput::make('slug')
-                    ->label('Slug')
-                    ->required()
-                    ->unique(Category::class, 'slug', fn($record) => $record),
-
-                Forms\Components\Select::make('order_column')
-                    ->label('Order')
-                    ->options(array_combine(range(1, 20), range(1, 20)))
-                    ->columns(2)
-                    ->required(),
-
-                    CuratorPicker::make('image')
-                    ->circular()
-                    ->size(32),
-
-
-            ]);
+        return $form->schema($this->getFormSchema());
     }
 
-    // protected function handleRecordCreation(array $data): ?Notification
-    // {
-    //     try {
-    //         return parent::handleRecordCreation($data);
-    //     } catch (QueryException $exception) {
-    //         if ($exception->errorInfo[1] == 1062) {
-    //             throw ValidationException::withMessages([
-    //                 'slug' => 'The slug must be unique.',
-    //             ]);
-    //         }
+    /**
+     * Get the form schema for creating a category.
+     *
+     * @return array
+     */
+    protected function getFormSchema(): array
+    {
+        return [
+            Forms\Components\Toggle::make('is_visible')
+                ->label(__('visible'))
+                ->default(true),
 
-    //         throw $exception;
-    //     }
-    // }
+            Forms\Components\RichEditor::make('description')
+                ->label(__('description'))
+                ->columnSpan('full'),
+
+            Forms\Components\TextInput::make('name')
+                ->label(__('name'))
+                ->required()
+                ->unique(Category::class, 'name', fn($record) => $record),
+
+            Forms\Components\Select::make('parent_id')
+                ->label(__('parent'))
+                ->options(Category::all()->pluck('name', 'id'))
+                ->nullable(),
+
+            Forms\Components\TextInput::make('slug')
+                ->label(__('slug'))
+                ->required()
+                ->unique(Category::class, 'slug', fn($record) => $record),
+
+            Forms\Components\Select::make('order_column')
+                ->label(__('order'))
+                ->options(array_combine(range(1, 20), range(1, 20)))
+                ->columns(2)
+                ->required(),
+
+            CuratorPicker::make('image_id')
+                ->label(__('image'))
+                ->circular()
+                ->size(32),
+        ];
+    }
 }
