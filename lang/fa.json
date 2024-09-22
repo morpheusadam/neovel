@@ -81,6 +81,18 @@
   "role_name":"اسم نقش",
   "create_role_subheading":"ایجاد نقش جدید",
   "save":"ذخیره",
+  "parent_category":"دسته بندی مادر",
   "create_user_manage":"ایجاد کاربر جدید",
-  "create_category":"ایجاد دسته جدید"
+  "create_category":"ایجاد دسته جدید",
+  "category_name":"نام دسته",
+  "manage_category":"مدیریت دسته بندی",
+  "edit_category_details":"جزئیات دسته بندی",
+  "manage_posts":"مدیریت پست ها",
+  "manage_pages":"مدیریت صفحات",
+  "manage_media":"مدیریت رسانه",
+  "manage_settings":"مدیریت تنظیمات",
+  "manage_reports":"مدیریت گزارش ها",
+  "manage_roles":"مدیریت نقش ها",
+  "manage_permissions":"مدیریت دسترسی ها"
+
 }

@@ -1,82 +1,105 @@
-# Filament Starter
+# NeoVel
 
-Here lives a beautiful starting point to quickly bootstrap your next [TALL stack](https://tallstack.dev/) application utilizing [Filament](https://filamentphp.com/) for the admin panel.
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-![Screenshot](https://i.imgur.com/AxerbeO.png)
+## Introduction
+Welcome to the Project Name! This project is designed to [brief description of the project]. It includes features such as user management, post management, and more.
 
 ## Features
+- User Management
+- Post Management
+- Category Management
+- Role and Permission Management
+- Media Management
+- Dashboard and Reports
 
-- 🚀 Quick, clean starting point with an example **Post** model and resource.
-- 🧑‍💻 Fully pre-configured and [customized](#plugins-used) Filament panel with best practices in place.
-- 🎨 Clean, minimally styled frontend powered by [Livewire](https://livewire.laravel.com/).
-- 💄 [TailwindCSS](https://tailwindcss.com/) and [Vite](https://vitejs.dev/) ready for immediate use.
-- 👷 Pre-bundled Livewire and [Alpine](https://alpinejs.dev/) for easy extendability.
-- ⚡️ SPA-ready in both Filament and the frontend.
-- 🔨 GitHub Actions workflows for [Pint](https://github.com/laravel/pint) with pre-configured Dependabot for dependencies.
-- 🔍️ Easy programmatic SEO using [romanzipp/laravel-seo](https://github.com/romanzipp/Laravel-SEO).
+## Installation
+To get started with this project, follow these steps:
 
-## Requirements
+1. **Clone the repository:**
+    ```bash
+    git clone https://github.com/yourusername/yourproject.git
+    cd yourproject
+    ```
 
-Make sure all dependencies have been installed before moving on:
+2. **Install dependencies:**
+    ```bash
+    composer install
+    npm install
+    ```
 
-- [PHP](https://secure.php.net/manual/en/install.php) >= 8.2
-- [Composer](https://getcomposer.org/download/)
-- [Node.js](http://nodejs.org/) >= 18
-- [Yarn](https://yarnpkg.com/en/docs/install)
+3. **Set up environment variables:**
+    Copy the `.env.example` file to `.env` and update the necessary environment variables.
+    ```bash
+    cp .env.example .env
+    ```
 
-## Getting Started
+4. **Generate application key:**
+    ```bash
+    php artisan key:generate
+    ```
 
-Start by creating the project using Composer and configuring the `.env` file:
+5. **Run migrations:**
+    ```bash
+    php artisan migrate
+    ```
 
-```sh
-composer create-project log1x/filament-starter:dev-main
-cd filament-starter
-```
+6. **Seed the database (optional):**
+    ```bash
+    php artisan db:seed
+    ```
 
-After `.env` is configured, you can proceed to migrate & seed the database:
+7. **Copy necessary files:**
+    ```bash
+    cp -r doc/install/filemanager/fa vendor/tomatophp/filament-media-manager/resources/lang/
+    cp doc/install/expection/ExceptionResource.php vendor/bezhansalleh/filament-exceptions/src/Resources/ExceptionResource.php
+    cp -r doc/install/expection/fa /var/www/neovel.local/vendor/bezhansalleh/filament-exceptions/resources/lang
+    ```
 
-```sh
-php artisan migrate:fresh --seed
-```
+8. **Run migrations and seed modules:**
+    ```bash
+    php artisan migrate:fresh --seed && php artisan module:seed User && php artisan module:seed Mag
+    ```
 
-Once the database is seeded, you can login at `/admin` using the default admin user:
+9. **Create a new module:**
+    ```bash
+    php artisan migrate:fresh --seed
+    php artisan module:see CMS
+    php artisan make:filament-user
+    ```
 
-```yaml
-Username: admin
-Password: admin
-```
+10. **Start the development server:**
+    ```bash
+    php artisan serve
+    ```
 
-### Build Assets
+## Usage
+Once the installation is complete, you can access the application at `http://localhost:8000`. 
 
-The project assets are compiled using Vite. This can be done by installing the dependencies and running the build command with Yarn.
+### Admin Panel
+To access the admin panel, navigate to `http://localhost:8000/admin` and log in with the admin credentials.
 
-```sh
-yarn install
-yarn build
-```
-
-## Plugins Used
-
-The following [Filament plugins](https://filamentphp.com/plugins) come fully implemented and configured out of the box:
-
-| **Plugin**                                                          | **Description**                                    | **Author**                                      |
-| :------------------------------------------------------------------ | :------------------------------------------------- | :---------------------------------------------- |
-| [Curator](https://github.com/awcodes/filament-curator)              | A beautiful media library.                         | [awcodes](https://github.com/awcodes)           |
-| [Gravatar](https://github.com/awcodes/filament-gravatar)            | Easy avatar integration powered by Gravatar.       | [awcodes](https://github.com/awcodes)           |
-| [Exceptions](https://github.com/bezhansalleh/filament-exceptions)   | A simple but powerful Exception viewer.            | [bezhansalleh](https://github.com/bezhansalleh) |
-| [Jobs Monitor](https://github.com/croustibat/filament-jobs-monitor) | Easily monitor background jobs and their progress. | [croustibat](https://github.com/croustibat)     |
-| [Breezy](https://github.com/jeffgreco13/filament-breezy)            | Customizable user profile pages and 2FA support.   | [jeffgreco13](https://github.com/jeffgreco13)   |
-| [Peek](https://github.com/pboivin/filament-peek)                    | Quick & efficient front-end previews of resources. | [pboivin](https://github.com/pboivin)           |
-| [Logger](https://github.com/z3d0x/filament-logger)                  | Zero-config resource activity logging.             | [z3d0x](https://github.com/z3d0x)               |
-
-## Bug Reports
-
-If you discover a bug in Filament Starter, please [open an issue](https://github.com/log1x/filament-starter/issues).
+### Translations
+This project supports multiple languages. You can find the translation files in the `lang` directory.
 
 ## Contributing
+We welcome contributions to this project. To contribute, please follow these steps:
 
-Contributing whether it be through PRs, reporting an issue, or suggesting an idea is encouraged and appreciated.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Open a pull request.
 
 ## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
-Filament Starter is provided under the [MIT License](LICENSE.md).
+## Database Diagram
+![Database Diagram](https://www.example.com/path/to/diagram.png)

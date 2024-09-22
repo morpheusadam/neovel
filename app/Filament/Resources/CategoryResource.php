@@ -110,9 +110,7 @@ class CategoryResource extends Resource
                 Tables\Columns\BooleanColumn::make('is_visible')
                     ->label(__('visible'))
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('parent.name')
-                    ->label(__('parent_category'))
-                    ->default(__('no_parent_category')),
+                
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make('delete')

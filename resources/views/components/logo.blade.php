@@ -1,3 +1,3 @@
 <div class="text-xl">
-  Filament <span class="text-primary-500 font-medium">Starter</span>
+  Neovel <span class="font-medium text-primary-500">Panel</span>
 </div>
