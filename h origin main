@@ -1,0 +1,107 @@
+[33mcommit c0c9649ae7a6171906ed2f04467789da3f5929be[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Mon Sep 23 00:41:07 2024 +0330
+
+    update new module ecommerce
+
+[33mcommit 0c47320a15d3ee040a5978c2e71f1b17671dd994[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sun Sep 22 21:38:21 2024 +0330
+
+    lang
+
+[33mcommit e207cf4c31404db8555069c703f23823133cbc55[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sun Sep 22 16:25:28 2024 +0330
+
+    env
+
+[33mcommit e7be841ab884c43860ef593b6241f42e7d1f13e5[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sun Sep 22 15:18:04 2024 +0330
+
+    update logo
+
+[33mcommit 6a123ce60e304bebcf9892e8214f63d47d14d264[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sun Sep 22 01:11:56 2024 +0330
+
+    update
+
+[33mcommit ebc69291304418e396f6d3dff26f26031a7a1f3c[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Tue Sep 17 13:38:50 2024 +0330
+
+    neovel admin
+
+[33mcommit b646cdaa93e9756d65aadf898c348bb1d5713404[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sat Sep 14 18:45:29 2024 +0330
+
+    complate user management
+
+[33mcommit 4e05f63521680e8f27a6d10a959af8fd2eae6520[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Sat Sep 14 04:21:48 2024 +0330
+
+    complate and fix user management
+
+[33mcommit 85d61db083e5ee54f106b34416d67d623f2617a1[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Fri Sep 13 13:30:31 2024 +0330
+
+    complate-filament-user-panek
+
+[33mcommit 2adffd3fdde95a5d385b6a7f888aa0b45befc8d1[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Thu Sep 12 12:48:31 2024 +0330
+
+    filament-create
+
+[33mcommit d6052b58b6afcba7c5913e25d3516c6a254ed7f0[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Thu Sep 12 11:18:26 2024 +0330
+
+    test1
+
+[33mcommit fba6c0969df2e734f0f22e20278eed5c6f425af7[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 23:31:55 2024 +0330
+
+    remove trashs
+
+[33mcommit d64247f1eebc99103869b80a23e57705b159c8cc[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 23:18:44 2024 +0330
+
+    install livewire - create folders of master project
+
+[33mcommit b6c710bb2d9056f16f0acdd7015d23159d1b3f02[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 20:38:37 2024 +0330
+
+    add module theme manager
+
+[33mcommit 85b858644d9284f2fba9e7f168114bafead10a54[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 17:05:15 2024 +0330
+
+    install live wire flamnet
+
+[33mcommit 5af36c18e41ee68283e01d049f87185fd79f4d59[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 14:18:38 2024 +0330
+
+    make CMS migrations
+
+[33mcommit 6b1292159068baf1b404868114e1a1020b691345[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Wed Sep 11 12:53:29 2024 +0330
+
+    complate login and register
+
+[33mcommit f85192b4d3e802bde26f5aded56ce5e3b6decd64[m
+Author: morpheusadam <morpheusadam95@gmail.com>
+Date:   Tue Sep 10 17:39:51 2024 +0330
+
+    migration-models
