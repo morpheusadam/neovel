@@ -24,7 +24,7 @@ To get started with this project, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/yourproject.git
+    git clone https://github.com//morpheusadam/neovel.git
     cd yourproject
     ```
 
@@ -102,4 +102,4 @@ We welcome contributions to this project. To contribute, please follow these ste
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
 ## Database Diagram
-![Database Diagram](https://www.example.com/path/to/diagram.png)
+![Database Diagram](https://dbdiagram.io/d/66d220d2eef7e08f0e44da9d)
