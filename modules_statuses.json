@@ -3,5 +3,6 @@
     "Mag": true,
     "User": true,
     "Ecommerce": true,
-    "Setting": true
+    "Setting": true,
+    "Warehouse": true
 }

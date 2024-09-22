@@ -1,0 +1,7 @@
+@extends('warehouse::layouts.master')
+
+@section('content')
+    <h1>Hello World</h1>
+
+    <p>Module: {!! config('warehouse.name') !!}</p>
+@endsection
